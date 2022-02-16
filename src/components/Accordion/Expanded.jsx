@@ -15,7 +15,7 @@ const Expanded = ({ children }) => {
   return (
     <>
       <Box
-        id={index}
+        // id={index}
         sx={{
           animation: `${opacity} 0.25s linear 0s 1  `,
         }}

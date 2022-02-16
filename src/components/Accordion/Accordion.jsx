@@ -2,36 +2,38 @@ import React, { useState } from 'react';
 import Collapsed from './Collapsed';
 import Expanded from './Expanded';
 
-const Accordion = ({ children, initial }) => {
-  // const isOpen = index === activeIndex;
-  // const [open, setOpen] = useState(isOpen);
+const Accordion = ({ children }) => {
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState();
+  const isOpen = index === open;
   console.log('children');
-  // const handleOnclick = () => {
-  //   selectIndex(index);
-  //   setOpen(isOpen && !open ? isOpen : !isOpen);
-  // };
+  const handleOpen = (e) => {
+    console.log('clicked');
+    console.log(e.target.parentNode.getAttribute('aria-controls'));
+    setIndex(e.target.parentNode.getAttribute('aria-controls'));
+    setOpen(true);
+  };
 
-  console.log('render Accordion');
-  // const [open, setOpen] = useState(initial);
-
-  // const handleOpen = (e) => {
-  //   const id = e.target.getAttribute('data-id');
-  //   id === open ? setOpen('') : setOpen(id);
-  // };
-
+  const cloneElement = (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child.props.children[0], {
+        isOpen,
+        open,
+        handleOpen,
+      });
+    }
+  };
   return (
     <div>
       {React.Children.map(children, (child) => {
+        const collapsed = cloneElement(child);
         const expanded = child.props.children[1];
-        console.log(expanded.props.children);
-        // console.log(child);
+
         return (
-          <div>
-            <div>
-              {expanded}
-              {/* {id === open && expanded} */}
-            </div>
-          </div>
+          <>
+            {collapsed}
+            {index && open && expanded}
+          </>
         );
       })}
     </div>

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Heading, Flex, Box } from 'theme-ui';
 import { ArrowIcon } from '../shared/ArrowIcon';
 
-const AccordionItem = ({ children, index, isOpen, open, handleOpen }) => {
+const AccordionItem = ({ children, id, isOpen, open, handleOpen }) => {
   return (
     <Flex
+      id={id}
       sx={{
         padding: '19px 0',
         alignItems: 'flex-start',
@@ -29,7 +30,7 @@ const AccordionItem = ({ children, index, isOpen, open, handleOpen }) => {
         handleClick={handleOpen}
         showAnswer={open}
         isOpen={isOpen}
-        index={index}
+        index={id}
       />
     </Flex>
   );

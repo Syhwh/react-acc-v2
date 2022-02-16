@@ -20,7 +20,6 @@ export const MainPage = () => {
       <Accordion initial={data.faqs[0]}>
         {data.faqs.map(({ question, answer }, idx) => (
           <Accordion.Item key={idx}>
-            <div> </div>
             <Accordion.Collapsed id={idx}>{question}</Accordion.Collapsed>
             <Accordion.Expanded>{answer}</Accordion.Expanded>
           </Accordion.Item>
