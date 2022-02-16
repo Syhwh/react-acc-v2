@@ -1,25 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Collapsed from './Collapsed';
 import Expanded from './Expanded';
 
 const Accordion = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState();
-  const isOpen = index === open;
-  console.log('children');
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleOpen = (e) => {
-    console.log('clicked');
-    console.log(e.target.parentNode.getAttribute('aria-controls'));
-    setIndex(e.target.parentNode.getAttribute('aria-controls'));
-    setOpen(true);
+    const currentElementIndex =
+      e.target.parentNode.getAttribute('aria-controls');
+
+    index === parseInt(currentElementIndex)
+      ? setIndex('')
+      : setIndex(parseInt(currentElementIndex));
+
+    setIsOpen(index === parseInt(currentElementIndex));
   };
+
+  useEffect(() => {
+    setOpen(isOpen && open ? isOpen : !isOpen);
+  }, [index]);
 
   const cloneElement = (child) => {
     if (React.isValidElement(child)) {
-      return React.cloneElement(child.props.children[0], {
-        isOpen,
-        open,
-        handleOpen,
+      return child.props.children[0].props.id === index
+        ? React.cloneElement(child.props.children[0], {
+            isOpen,
+            open,
+            handleOpen,
+          })
+        : React.cloneElement(child.props.children[0], {
+            isOpen,
+            handleOpen,
+          });
+    }
+  };
+  const cloneExpElement = (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child.props.children[1], {
+        id: index,
       });
     }
   };
@@ -27,12 +47,13 @@ const Accordion = ({ children }) => {
     <div>
       {React.Children.map(children, (child) => {
         const collapsed = cloneElement(child);
-        const expanded = child.props.children[1];
+        const expanded = cloneExpElement(child);
+        const currentIdElement = child.props.children[0].props.id;
 
         return (
           <>
             {collapsed}
-            {index && open && expanded}
+            {index === currentIdElement && expanded}
           </>
         );
       })}
