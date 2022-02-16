@@ -17,7 +17,7 @@ export const MainPage = () => {
         },
       }}
     >
-      <Accordion initial={data.faqs[0]}>
+      <Accordion>
         <Accordion.Header>{data.heading}</Accordion.Header>
         {data.faqs.map(({ question, answer }, idx) => (
           <Accordion.Item key={idx}>

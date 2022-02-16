@@ -3,7 +3,6 @@ import { IconButton } from 'theme-ui';
 import { keyframes } from '@emotion/react';
 
 export const ArrowIcon = ({ showAnswer, handleClick, isOpen, index }) => {
-  console.log({ showAnswer, handleClick, isOpen, index });
   const rotation = keyframes`
   from {
     transform: rotate(0deg);
@@ -21,6 +20,7 @@ export const ArrowIcon = ({ showAnswer, handleClick, isOpen, index }) => {
         animation: showAnswer && `${rotation} 0.2s linear 0s 1  `,
         height: '1rem',
         transform: showAnswer ? 'rotateZ(90deg)' : '',
+        border: '2px solid red',
       }}
       onClick={handleClick}
       aria-controls={index}

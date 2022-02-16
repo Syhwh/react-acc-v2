@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Box, Flex } from 'theme-ui';
 import Header from './Header';
 import Collapsed from './Collapsed';
 import Expanded from './Expanded';
 import Header from './Header';
+import { ArrowIcon } from '../shared/ArrowIcon';
 
 const Accordion = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -18,6 +20,9 @@ const Accordion = ({ children }) => {
       : setIndex(parseInt(currentElementIndex));
 
     setIsOpen(index === parseInt(currentElementIndex));
+    console.log('clicked');
+    console.log(e.target.getAttribute('aria-controls'));
+    console.log('clicked');
   };
 
   useEffect(() => {
@@ -26,16 +31,7 @@ const Accordion = ({ children }) => {
 
   const cloneElement = (child) => {
     if (React.isValidElement(child)) {
-      return child.props.children[0].props.id === index
-        ? React.cloneElement(child.props.children[0], {
-            isOpen,
-            open,
-            handleOpen,
-          })
-        : React.cloneElement(child.props.children[0], {
-            isOpen,
-            handleOpen,
-          });
+      return React.cloneElement(child.props.children[0]);
     }
   };
   const cloneExpElement = (child) => {
@@ -45,20 +41,46 @@ const Accordion = ({ children }) => {
       });
     }
   };
-
   return (
     <>
       {children[0].props.children}
+
       {React.Children.map(children[1], (child) => {
         const collapsed = cloneElement(child);
         const expanded = cloneExpElement(child);
         const currentIdElement = child.props.children[0].props.id;
-        console.log(child.props.children[0].props);
 
         return (
           <>
-            {collapsed}
-            {index === currentIdElement && expanded}
+            <Flex
+              id={index}
+              sx={{
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+                width: '100%',
+                padding: '19px 0',
+                borderBottom: '1px solid #EAE4CE',
+                ':last-of-type': {
+                  borderBottom: 'none',
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  maxWidth: '90%',
+                  textAlign: 'left',
+                }}
+              >
+                {collapsed}
+                {index === currentIdElement && expanded}
+              </Box>
+              <ArrowIcon
+                handleClick={handleOpen}
+                showAnswer={index === currentIdElement}
+                isOpen={isOpen}
+                index={currentIdElement}
+              />
+            </Flex>
           </>
         );
       })}

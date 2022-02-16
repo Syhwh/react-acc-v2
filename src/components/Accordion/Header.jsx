@@ -1,19 +1,10 @@
 import React from 'react';
 import { Heading } from 'theme-ui';
-import { keyframes } from '@emotion/react';
-import { MarkdownContent } from '../shared/MarkdownContent';
 
 const Header = ({ children }) => {
-  const opacity = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
   return (
     <Heading
+      as="h2"
       variant={'heading'}
       sx={{
         width: '80%',
@@ -22,6 +13,7 @@ const Header = ({ children }) => {
         marginBottom: '1.8rem',
         '@media screen and (min-width: 40em)': {
           width: '100%',
+          color: 'red',
         },
       }}
     >
