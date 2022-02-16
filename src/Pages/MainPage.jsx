@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container } from 'theme-ui';
-import { Accordion } from '../components/Accordion';
-import items from './utils/data';
+import Accordion from '../components/Accordion/Accordion';
+
+import data from '../utils/data';
 
 export const MainPage = () => {
   return (
@@ -16,9 +17,8 @@ export const MainPage = () => {
         },
       }}
     >
-      OK
-      <Accordion initial={items.faqs[0]}>
-        {items.faqs.map(({ question, answer }, idx) => (
+      <Accordion initial={data.faqs[0]}>
+        {data.faqs.map(({ question, answer }, idx) => (
           <Accordion.Item key={idx}>
             <div> </div>
             <Accordion.Collapsed id={idx}>{question}</Accordion.Collapsed>
