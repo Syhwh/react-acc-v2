@@ -17,21 +17,8 @@ export const MainPage = () => {
         },
       }}
     >
-      <Heading
-        variant={'heading'}
-        sx={{
-          width: '80%',
-          fontSize: [2, 4],
-          height: '1rem',
-          marginBottom: '1.8rem',
-          '@media screen and (min-width: 40em)': {
-            width: '100%',
-          },
-        }}
-      >
-        {heading}
-      </Heading>
       <Accordion initial={data.faqs[0]}>
+        <Accordion.Header>{data.heading}</Accordion.Header>
         {data.faqs.map(({ question, answer }, idx) => (
           <Accordion.Item key={idx}>
             <Accordion.Collapsed id={idx}>{question}</Accordion.Collapsed>

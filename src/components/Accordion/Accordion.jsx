@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Header from './Header';
 import Collapsed from './Collapsed';
 import Expanded from './Expanded';
+import Header from './Header';
 
 const Accordion = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -43,12 +45,15 @@ const Accordion = ({ children }) => {
       });
     }
   };
+
   return (
-    <div>
-      {React.Children.map(children, (child) => {
+    <>
+      {children[0].props.children}
+      {React.Children.map(children[1], (child) => {
         const collapsed = cloneElement(child);
         const expanded = cloneExpElement(child);
         const currentIdElement = child.props.children[0].props.id;
+        console.log(child.props.children[0].props);
 
         return (
           <>
@@ -57,10 +62,10 @@ const Accordion = ({ children }) => {
           </>
         );
       })}
-    </div>
+    </>
   );
 };
-
+Accordion.Header = Header;
 Accordion.Collapsed = Collapsed;
 Accordion.Expanded = Expanded;
 Accordion.Item = ({ children }) => children;

@@ -25,9 +25,9 @@ const Header = ({ children }) => {
         },
       }}
     >
-      {heading}
+      {children}
     </Heading>
   );
 };
 
-export default Expanded;
+export default Header;
