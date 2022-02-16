@@ -1,0 +1,31 @@
+import React from 'react';
+import { Container } from 'theme-ui';
+import { Accordion } from '../components/Accordion';
+import items from './utils/data';
+
+export const MainPage = () => {
+  return (
+    <Container
+      sx={{
+        padding: '32px 20px 52px 20px',
+        textAlign: 'left',
+        '@media screen and (min-width: 60em)': {
+          padding: '56px 286px',
+          width: '100%',
+          textAlign: 'center',
+        },
+      }}
+    >
+      OK
+      <Accordion initial={items.faqs[0]}>
+        {items.faqs.map(({ question, answer }, idx) => (
+          <Accordion.Item key={idx}>
+            <div> </div>
+            <Accordion.Collapsed id={idx}>{question}</Accordion.Collapsed>
+            <Accordion.Expanded>{answer}</Accordion.Expanded>
+          </Accordion.Item>
+        ))}
+      </Accordion>
+    </Container>
+  );
+};
