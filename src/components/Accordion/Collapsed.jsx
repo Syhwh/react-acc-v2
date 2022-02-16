@@ -1,15 +1,10 @@
 import React from 'react';
-import { Heading, Flex, Box } from 'theme-ui';
-import { ArrowIcon } from '../shared/ArrowIcon';
+import { Heading } from 'theme-ui';
 
-const AccordionItem = ({ children }) => {
-  return (
-    <>
-      <Heading p={0} as="h2" variant="subHeading" color="secondary">
-        {children}
-      </Heading>
-    </>
-  );
-};
+const AccordionItem = ({ children }) => (
+  <Heading p={0} as="h2" variant="subHeading" color="secondary">
+    {children}
+  </Heading>
+);
 
 export default AccordionItem;

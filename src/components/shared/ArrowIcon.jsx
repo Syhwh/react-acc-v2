@@ -20,7 +20,6 @@ export const ArrowIcon = ({ showAnswer, handleClick, isOpen, index }) => {
         animation: showAnswer && `${rotation} 0.2s linear 0s 1  `,
         height: '1rem',
         transform: showAnswer ? 'rotateZ(90deg)' : '',
-        border: '2px solid red',
       }}
       onClick={handleClick}
       aria-controls={index}
@@ -29,6 +28,7 @@ export const ArrowIcon = ({ showAnswer, handleClick, isOpen, index }) => {
       <svg
         style={{
           translate: '25%',
+          padding: '0.5px',
         }}
         width="24"
         height="12"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Heading } from 'theme-ui';
+import { Container } from 'theme-ui';
 import Accordion from '../components/Accordion/Accordion';
 
 import data from '../utils/data';

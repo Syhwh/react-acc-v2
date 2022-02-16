@@ -5,6 +5,8 @@ import Collapsed from './Collapsed';
 import Expanded from './Expanded';
 import Header from './Header';
 import { ArrowIcon } from '../shared/ArrowIcon';
+import { DT } from '../shared/DescriptionListComponents';
+import { DD } from '../shared/DescriptionListComponents';
 
 const Accordion = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -20,9 +22,6 @@ const Accordion = ({ children }) => {
       : setIndex(parseInt(currentElementIndex));
 
     setIsOpen(index === parseInt(currentElementIndex));
-    console.log('clicked');
-    console.log(e.target.getAttribute('aria-controls'));
-    console.log('clicked');
   };
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const Accordion = ({ children }) => {
   };
   return (
     <>
-      {children[0].props.children}
+      {React.cloneElement(children[0])}
 
       {React.Children.map(children[1], (child) => {
         const collapsed = cloneElement(child);
@@ -53,6 +52,7 @@ const Accordion = ({ children }) => {
         return (
           <>
             <Flex
+              as="dl"
               id={index}
               sx={{
                 alignItems: 'flex-start',
@@ -71,8 +71,8 @@ const Accordion = ({ children }) => {
                   textAlign: 'left',
                 }}
               >
-                {collapsed}
-                {index === currentIdElement && expanded}
+                <DT>{collapsed}</DT>
+                <DD>{index === currentIdElement && expanded}</DD>
               </Box>
               <ArrowIcon
                 handleClick={handleOpen}
