@@ -25,7 +25,7 @@ const Accordion = ({ children }) => {
   };
 
   useEffect(() => {
-    setOpen(isOpen && open ? isOpen : !isOpen);
+    setOpen(isOpen && open ? true : false);
   }, [index]);
 
   const cloneElement = (child) => {
@@ -53,7 +53,7 @@ const Accordion = ({ children }) => {
           <>
             <Flex
               as="dl"
-              id={index}
+              id={currentIdElement}
               sx={{
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
